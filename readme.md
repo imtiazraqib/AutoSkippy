@@ -2,7 +2,7 @@
 
 Welcome to AutoSkippy, your ultimate companion for seamless Netflix binge-watching!
 
-![AutoSkippy Logo](assets/autoskippy_logo.png)
+![AutoSkippy Promo Tile](assets/CWS_autoskippy_promo_tile.png)
 
 ## Why AutoSkippy?
 
@@ -25,15 +25,10 @@ AutoSkippy is currently pending review on the Chrome Web Store. Once approved, y
 2. Open Netflix and start watching your favorite shows.
 3. Sit back and relax—AutoSkippy takes care of the intros for you!
 
-## Screenshots
+## Simulated Preview
 
 ![AutoSkippy Listing](assets/CWS_autoskippy_listing_1.png)
-![AutoSkippy Promo Tile](assets/CWS_autoskippy_promo_tile.png)
 
 ## Feedback
 
-We'd love to hear from you! Found a bug or have a suggestion? [Let us know here](link-to-issue-tracker).
-
----
-
-**Note:** AutoSkippy enhances accessibility by automating repetitive tasks, making Netflix even more enjoyable for everyone!
+I'd love to hear from you! Found a bug or have a suggestion? [Let me know here](https://github.com/imtiazraqib/AutoSkippy/issues/new).
