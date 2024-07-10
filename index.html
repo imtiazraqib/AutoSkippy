@@ -5,94 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AutoSkippy For Netflix</title>
     <style>
+      /* General styles */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #8e2de2, #4a00e0); /* Gradient background */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      /* Hide element */
       .hide {
         display: none;
       }
-      .mt-5 {
-        margin-top: 5px;
-      }
 
-      .switch {
+      .toggle-button-cover {
+        display: table-cell;
         position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
+        width: 200px;
+        height: 140px;
+        box-sizing: border-box;
       }
 
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      input:checked + .slider {
-        background-color: #2196f3;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196f3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-      }
-
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
-
-      .container {
-        padding: 15px;
-        border: 1px solid blue;
-        border-radius: 15px;
-        width: 250px;
+      .button-cover {
+        height: 100px;
+        margin: 20px;
+        background-color: #fff;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+        border-radius: 4px;
         display: flex;
         flex-direction: column;
+        justify-content: start;
         align-items: center;
-        justify-content: center;
+      }
+
+      .button-cover:before {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d7e3e3;
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px;
+      }
+
+      .button-cover,
+      .knobs,
+      .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .button {
+        position: relative;
+        top: 15%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+      }
+
+      .button.r,
+      .button.r .layer {
+        border-radius: 100px;
+      }
+      .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+      }
+
+      .knobs {
+        z-index: 2;
+      }
+
+      .layer {
+        width: 100%;
+        background-color: #ebf7fc;
+        transition: 0.3s ease all;
+        z-index: 1;
+      }
+      /* Button 3 */
+      #button-3 .knobs:before {
+        content: "OFF";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 20px;
+        height: 10px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+        padding: 9px 4px;
+        background-color: #f44336;
+        border-radius: 50%;
+        transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+      }
+
+      #button-3 .checkbox:active + .knobs:before {
+        width: 46px;
+        border-radius: 100px;
+      }
+
+      #button-3 .checkbox:checked:active + .knobs:before {
+        margin-left: -26px;
+      }
+
+      #button-3 .checkbox:checked + .knobs:before {
+        content: "ON";
+        left: 42px;
+        background-color: #5cb85c;
+      }
+
+      #button-3 .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h4>AutoSkippy</h4>
-      <label class="switch">
-        <input id="extension-toggle" type="checkbox" />
-        <span class="slider round"></span>
-      </label>
+    <div class="toggle-button-cover">
+      <div class="button-cover">
+        <h3 style="margin: 15px 0px">AutoSkippy</h3>
+        <div class="button r" id="button-3">
+          <input id="extension-toggle" type="checkbox" class="checkbox" />
+          <div class="knobs"></div>
+          <div class="layer"></div>
+        </div>
+      </div>
     </div>
-    <div class="mt-5">Status: <span id="onIndicator" class="hide">🟢</span><span id="offIndicator">🔴</span></div>
+    <script src="popup.js"></script>
   </body>
-  <script src="popup.js"></script>
 </html>
