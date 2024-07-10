@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AutoSkippy For Netflix</title>
     <style>
+      .hide {
+        display: none;
+      }
+      .mt-5 {
+        margin-top: 5px;
+      }
+
       .switch {
         position: relative;
         display: inline-block;
@@ -85,6 +92,7 @@
         <span class="slider round"></span>
       </label>
     </div>
+    <div class="mt-5">Status: <span id="onIndicator" class="hide">🟢</span><span id="offIndicator">🔴</span></div>
   </body>
-  <script src="script.js"></script>
+  <script src="popup.js"></script>
 </html>

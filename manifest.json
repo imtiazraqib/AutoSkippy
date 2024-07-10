@@ -1,11 +1,18 @@
 {
-    "name": "AutoSkippy",
-    "version": "1.0.0",
-    "description": "Automatically skip intros in Netflix",
-    "manifest_version": 3,
-    "author": "Imtiaz Raqib",
-    "action":{
-        "default_popup": "index.html",
-        "default_title": "AutoSkippy"
+  "name": "AutoSkippy",
+  "version": "1.0.0",
+  "description": "Automatically skip intros in Netflix",
+  "manifest_version": 3,
+  "author": "Imtiaz Raqib",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "AutoSkippy"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.netflix.com/*"],
+      "js": ["script.js"]
     }
+  ]
 }
