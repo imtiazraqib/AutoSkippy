@@ -1,9 +1,15 @@
 {
   "name": "AutoSkippy",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Automatically skip intros in Netflix",
   "manifest_version": 3,
   "author": "Imtiaz Raqib",
+  "icons": {
+    "16": "autoskippy_16.png",
+    "32": "autoskippy_32.png",
+    "48": "autoskippy_48.png",
+    "128": "autoskippy_128.png"
+  },
   "permissions": ["activeTab", "scripting", "storage"],
   "action": {
     "default_popup": "index.html",
