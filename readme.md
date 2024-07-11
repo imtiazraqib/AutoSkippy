@@ -17,7 +17,7 @@ AutoSkippy revolutionizes your Netflix experience by automatically skipping intr
 
 ## Installation
 
-AutoSkippy is currently pending review on the Chrome Web Store. Once approved, you'll be able to install it directly from the store.
+[AutoSkippy is live on the Chrome Web Store!](https://chromewebstore.google.com/detail/autoskippy/dokilgnebmohchllgdpkcidnlmpjfaji?hl=en&authuser=1)
 
 ## How to Use
 
