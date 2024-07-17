@@ -1,8 +1,10 @@
+<img src="assets/autoskippy_logo.png" alt="AutoSkippy Logo" width="100px"/>
+
 # AutoSkippy Chrome Extension
 
 Welcome to AutoSkippy, your ultimate companion for seamless Netflix binge-watching!
 
-![AutoSkippy Promo Tile](assets/CWS_autoskippy_promo_tile.png)
+<a href="https://www.producthunt.com/posts/autoskippy-for-chrome?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-autoskippy&#0045;for&#0045;chrome" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=471648&theme=light" alt="AutoSkippy&#0032;for&#0032;Chrome - Skip&#0032;Netflix&#0032;intros&#0032;automatically | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 ## Why AutoSkippy?
 
