@@ -25,7 +25,6 @@ function setPlatformUI(platform) {
       platformIcon.src = "icons8-amazon-prime-video-96.png";
       platformText.innerText = "Skip Ads";
       break;
-    // Add cases for other platforms if needed
     default:
       platformIcon.src = "icons8-no-96.png";
       platformText.innerText = "No supported platform detected";
@@ -52,7 +51,7 @@ toggleSwitch.addEventListener("change", function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
-        function: startSkipIntro,
+        files: ["script.js"], // Ensure the script is loaded
       });
     });
   } else {

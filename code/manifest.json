@@ -17,7 +17,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.netflix.com/*"],
+      "matches": ["*://*.netflix.com/*", "*://*.youtube.com/*", "*://*.primevideo.com/*"],
       "js": ["script.js"]
     }
   ]
