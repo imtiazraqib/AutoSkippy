@@ -162,6 +162,7 @@
         text-decoration: underline;
       }
       #platform-info {
+        position: relative;
         margin: auto;
         width: 180px;
         display: flex;
@@ -176,6 +177,16 @@
         padding-top: 5px;
         padding-bottom: 5px;
         box-shadow: 0 10px 20px -8px #c5d6d6;
+      }
+      .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #f5b342;
+        color: white;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 10px;
       }
     </style>
   </head>
@@ -193,8 +204,9 @@
         <div id="platform-info">
           <img id="platform-icon" src="" alt="Platform Icon" style="width: 20px; height: 20px" />
           <span id="platform-text">No actions available</span>
+          <div id="platform-badge" class="badge hide">In Progress</div>
         </div>
-        <p>Version 2.0.5</p>
+        <p>Version 2.0.7</p>
         <p>
           Made with ❤️ & ☕ by
           <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer"> Imtiaz Raqib </a>
