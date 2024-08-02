@@ -7,6 +7,45 @@ chrome.storage.sync.get(["extensionEnabled"], function (result) {
   }
 });
 
+// Function to set the UI based on the detected platform
+function setPlatformUI(platform) {
+  const platformIcon = document.getElementById("platform-icon");
+  const platformText = document.getElementById("platform-text");
+
+  switch (platform) {
+    case "netflix":
+      platformIcon.src = "icons8-netflix-96.png";
+      platformText.innerText = "Skip Intro, Skip Next Episode";
+      break;
+    case "youtube":
+      platformIcon.src = "icons8-youtube-96.png";
+      platformText.innerText = "Skip Ads";
+      break;
+    case "prime":
+      platformIcon.src = "icons8-amazon-prime-video-96.png";
+      platformText.innerText = "Skip Ads";
+      break;
+    // Add cases for other platforms if needed
+    default:
+      platformIcon.src = "icons8-no-96.png";
+      platformText.innerText = "No supported platform detected";
+  }
+}
+
+// Get the active tab's URL and set the platform UI
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  let url = tabs[0].url;
+  if (url.includes("netflix.com")) {
+    setPlatformUI("netflix");
+  } else if (url.includes("youtube.com")) {
+    setPlatformUI("youtube");
+  } else if (url.includes("primevideo.com")) {
+    setPlatformUI("prime");
+  } else {
+    setPlatformUI("default");
+  }
+});
+
 toggleSwitch.addEventListener("change", function () {
   if (toggleSwitch.checked) {
     chrome.storage.sync.set({ extensionEnabled: true });

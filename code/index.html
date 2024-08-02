@@ -29,8 +29,8 @@
       .toggle-button-cover {
         display: table-cell;
         position: relative;
-        width: 200px;
-        height: 140px;
+        width: 220px;
+        height: 220px;
         box-sizing: border-box;
       }
 
@@ -137,6 +137,45 @@
       #button-3 .checkbox:checked ~ .layer {
         background-color: #fcebeb;
       }
+      .footer {
+        text-align: center;
+        font-size: 10px;
+        color: #ffffff;
+        position: absolute;
+        bottom: 5px;
+        margin-left: 0;
+        margin-right: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .footer p {
+        margin: 0;
+      }
+
+      .footer a {
+        color: #f5b342;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      #platform-info {
+        margin: auto;
+        width: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        background-color: #fff;
+        color: black;
+        border-radius: 4px;
+        font-weight: bold;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
     </style>
   </head>
   <body>
@@ -149,7 +188,19 @@
           <div class="layer"></div>
         </div>
       </div>
+      <div class="footer">
+        <div id="platform-info">
+          <img id="platform-icon" src="" alt="Platform Icon" style="width: 20px; height: 20px" />
+          <span id="platform-text">No actions available</span>
+        </div>
+        <p>Version 2.0.5</p>
+        <p>
+          Made with ❤️ & ☕ by
+          <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer"> Imtiaz Raqib </a>
+        </p>
+      </div>
     </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
