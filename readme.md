@@ -8,14 +8,17 @@ Welcome to AutoSkippy, your ultimate companion for seamless Netflix binge-watchi
 
 ## Why AutoSkippy?
 
-AutoSkippy revolutionizes your Netflix experience by automatically skipping intros for you. No more repetitive clicking—just toggle it on and enjoy uninterrupted streaming!
+AutoSkippy revolutionizes your Netflix experience by automatically skipping intros, ads, recaps, and advancing to the next episode. No more repetitive clicking—just toggle it on and enjoy uninterrupted streaming!
 
 ## Features
 
 - **Automatic Intros Skip**: Say goodbye to intro screens with just a click.
+- **Ad Skipping**: Automatically skips ads on YouTube and other platforms.
+- **Recap Skipping**: Eliminates recap screens so you can dive right into the next episode.
+- **Next Episode Button**: Seamlessly advances to the next episode without interruption.
 - **Stylish Design**: Sleek toggle button with interactive indicators.
 - **Accessibility**: Perfect for everyone, especially those who prefer a hands-free experience.
-- **Privacy First**: Your data stays private, AutoSkippy operates securely within Netflix.
+- **Privacy First**: Your data stays private; AutoSkippy operates securely within streaming platforms.
 
 ## Installation
 
@@ -24,8 +27,8 @@ AutoSkippy revolutionizes your Netflix experience by automatically skipping intr
 ## How to Use
 
 1. Toggle AutoSkippy on.
-2. Open Netflix and start watching your favorite shows.
-3. Sit back and relax—AutoSkippy takes care of the intros for you!
+2. Open Netflix, YouTube, or other supported platforms and start watching.
+3. Sit back and relax—AutoSkippy takes care of the intros, ads, recaps, and episode changes for you!
 
 ## Simulated Preview
 
