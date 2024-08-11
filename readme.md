@@ -32,7 +32,7 @@ AutoSkippy revolutionizes your Netflix experience by automatically skipping intr
 
 ## Simulated Preview
 
-![AutoSkippy Listing](assets/CWS_autoskippy_listing_1.png)
+![AutoSkippy Listing](assets/CWS_autoskippy_listing_2.png)
 
 ## Feedback
 
