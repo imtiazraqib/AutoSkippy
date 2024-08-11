@@ -23,17 +23,32 @@ function startSkipIntro() {
   interval = setInterval(() => {
     const netflixSkipButton = document.querySelector('button[data-uia="player-skip-intro"]');
     const netflixNextEpisodeButton = document.querySelector('button[data-uia="next-episode-seamless-button"]');
+    const netflixSkipRecapButton = document.querySelector('button[data-uia="player-skip-recap"]');
     const youtubeSkipAdButton = document.querySelector(".ytp-skip-ad-button");
+    const primeSkipButton = document.querySelector(".atvwebplayersdk-skipelement-button");
+    const craveSkipIntroButton = document.querySelector('button[aria-label="Skip Intro"]');
+    const craveNextEpisodeButton = document.querySelector('button[aria-label="Play next content"]');
+    const disneySkipIntroButton = document.querySelector('button[data-testid="skip-credits"]');
+    const disneyNextEpisodeButton = document.querySelector('button[data-testid="next-episode-button"]');
 
     if (netflixSkipButton) {
-      console.log("Netflix skip intro button found.");
       netflixSkipButton.click();
     } else if (netflixNextEpisodeButton) {
-      console.log("Netflix next episode button found.");
       netflixNextEpisodeButton.click();
+    } else if (netflixSkipRecapButton) {
+      netflixSkipRecapButton.click();
     } else if (youtubeSkipAdButton && youtubeSkipAdButton.style.display !== "none") {
-      console.log("YouTube skip ad button found.");
       youtubeSkipAdButton.click();
+    } else if (primeSkipButton) {
+      primeSkipButton.click();
+    } else if (craveSkipIntroButton) {
+      craveSkipIntroButton.click();
+    } else if (craveNextEpisodeButton) {
+      craveNextEpisodeButton.click();
+    } else if (disneySkipIntroButton) {
+      disneySkipIntroButton.click();
+    } else if (disneyNextEpisodeButton) {
+      disneyNextEpisodeButton.click();
     } else {
       console.log("No actionable buttons found.");
     }

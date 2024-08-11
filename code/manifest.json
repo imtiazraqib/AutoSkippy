@@ -1,6 +1,6 @@
 {
   "name": "AutoSkippy | Skip Intros Automatically in Netflix",
-  "version": "2.0.7",
+  "version": "2.0.11",
   "description": "Automatically skip intros in Netflix",
   "manifest_version": 3,
   "author": "Imtiaz Raqib",
@@ -17,7 +17,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.netflix.com/*", "*://*.youtube.com/*", "*://*.primevideo.com/*"],
+      "matches": [
+        "*://*.netflix.com/*",
+        "*://*.youtube.com/*",
+        "*://*.primevideo.com/*",
+        "*://*.disneyplus.com/*",
+        "*://*.crave.ca/*"
+      ],
       "js": ["script.js"]
     }
   ]

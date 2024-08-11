@@ -17,18 +17,27 @@ function setPlatformUI(platform) {
     case "netflix":
       platformBadge.classList.add("hide");
       platformIcon.src = "icons8-netflix-96.png";
-      platformText.innerText = "Skip Intro, Skip Next Episode";
+      platformText.innerText = "Skip Intro, Skip Recap, Skip Next Episode";
       break;
     case "youtube":
-      platformBadge.classList.remove("hide");
+      platformBadge.classList.add("hide");
       platformIcon.src = "icons8-youtube-96.png";
       platformText.innerText = "Skip Ads";
       break;
     case "prime":
-      platformBadge.classList.remove("hide");
+      platformBadge.classList.add("hide");
       platformIcon.src = "icons8-amazon-prime-video-96.png";
-      platformText.innerText = "Skip Ads";
+      platformText.innerText = "Skip Intro, Skip Recap";
       break;
+    case "crave":
+      platformBadge.classList.add("hide");
+      platformIcon.src = "icons8-crave-96.png";
+      platformText.innerText = "Skip Intro";
+      break;
+    case "disney":
+      platformBadge.classList.remove("hide");
+      platformIcon.src = "icons8-disney-96.png";
+      platformText.innerText = "Skip Intro";
     default:
       platformIcon.src = "icons8-no-96.png";
       platformText.innerText = "No supported platform detected";
@@ -44,6 +53,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     setPlatformUI("youtube");
   } else if (url.includes("primevideo.com")) {
     setPlatformUI("prime");
+  } else if (url.includes("crave.ca")) {
+    setPlatformUI("crave");
+  } else if (url.includes("disneyplus.com")) {
+    setPlatformUI("disney");
   } else {
     setPlatformUI("default");
   }
