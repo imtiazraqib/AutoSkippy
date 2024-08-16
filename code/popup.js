@@ -1,11 +1,16 @@
 let toggleSwitch = document.getElementById("extension-toggle");
 
 // Load the saved state
-chrome.storage.sync.get(["extensionEnabled"], function (result) {
-  if (result.extensionEnabled) {
-    toggleSwitch.checked = true;
-  }
-});
+browser.storage.sync
+  .get("extensionEnabled")
+  .then(function (result) {
+    if (result.extensionEnabled !== undefined && result.extensionEnabled) {
+      toggleSwitch.checked = true;
+    }
+  })
+  .catch(function (error) {
+    console.error("Error retrieving extension state:", error);
+  });
 
 // Function to set the UI based on the detected platform
 function setPlatformUI(platform) {
