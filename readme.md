@@ -1,6 +1,6 @@
 <img src="assets/autoskippy_logo.png" alt="AutoSkippy Logo" width="100px"/>
 
-# AutoSkippy Chrome Extension
+# AutoSkippy Chrome & Firefox Extension
 
 Welcome to AutoSkippy, your ultimate companion for seamless binge-watching!
 
@@ -22,7 +22,8 @@ AutoSkippy revolutionizes your streaming experience by automatically skipping in
 
 ## Installation
 
-[AutoSkippy is live on the Chrome Web Store!](https://chromewebstore.google.com/detail/autoskippy/dokilgnebmohchllgdpkcidnlmpjfaji?hl=en&authuser=1)
+[AutoSkippy is live on the Chrome Web Store!](https://chromewebstore.google.com/detail/autoskippy/dokilgnebmohchllgdpkcidnlmpjfaji)
+[AutoSkippy is live on the Firefox Add-on Store!](https://addons.mozilla.org/addon/autoskippy-skip-intros-ads/)
 
 ## How to Use
 
