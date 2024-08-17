@@ -22,8 +22,8 @@ AutoSkippy revolutionizes your streaming experience by automatically skipping in
 
 ## Installation
 
-[AutoSkippy is live on the Chrome Web Store!](https://chromewebstore.google.com/detail/autoskippy/dokilgnebmohchllgdpkcidnlmpjfaji)
-[AutoSkippy is live on the Firefox Add-on Store!](https://addons.mozilla.org/addon/autoskippy-skip-intros-ads/)
+- [AutoSkippy is live on the Chrome Web Store!](https://chromewebstore.google.com/detail/autoskippy/dokilgnebmohchllgdpkcidnlmpjfaji)
+- [AutoSkippy is live on the Firefox Add-on Store!](https://addons.mozilla.org/addon/autoskippy-skip-intros-ads/)
 
 ## How to Use
 
