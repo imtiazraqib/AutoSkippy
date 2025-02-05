@@ -1,6 +1,6 @@
 {
   "name": "AutoSkippy | Skip Intros, Ads, Recaps & More",
-  "version": "2.0.12",
+  "version": "3.0.0",
   "description": "Automatically skip intros, ads, recaps and next episode in Netflix, YouTube, Prime Video, Disney+, Crave and more.",
   "manifest_version": 3,
   "browser_specific_settings": {
