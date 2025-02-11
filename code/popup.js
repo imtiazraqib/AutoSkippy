@@ -5,7 +5,7 @@ const autoNextToggle = document.getElementById("auto-next-toggle");
 
 chrome.storage.sync
   .get(["skipIntro", "skipRecap", "autoNext", "skipAds", "extensionEnabled"])
-  .then(function(result) {
+  .then(function (result) {
     // Check for legacy setting and migrate
     if (result.extensionEnabled !== undefined && result.extensionEnabled) {
       skipIntroToggle.checked = true;
@@ -17,7 +17,7 @@ chrome.storage.sync
         skipIntro: true,
         skipRecap: true,
         skipAds: true,
-        autoNext: true
+        autoNext: true,
       });
 
       chrome.storage.sync.remove("extensionEnabled");
@@ -27,7 +27,8 @@ chrome.storage.sync
       skipRecapToggle.checked = result.skipRecap ?? false;
       autoNextToggle.checked = result.autoNext ?? false;
     }
-  }).catch((error) => {
+  })
+  .catch((error) => {
     console.error("Error retrieving extension states:", error);
   });
 
@@ -36,7 +37,7 @@ function setPlatformUI(platform) {
   const platformIcon = document.getElementById("platform-icon");
   const platformText = document.getElementById("platform-text");
   const platformBadge = document.getElementById("platform-badge");
-  
+
   skipRecapToggle.parentElement.parentElement.style.display = "none";
   skipIntroToggle.parentElement.parentElement.style.display = "none";
   skipAdsToggle.parentElement.parentElement.style.display = "none";
@@ -65,10 +66,11 @@ function setPlatformUI(platform) {
       platformIcon.src = "icons8-crave-96.png";
       platformText.innerText = "Crave Controls";
       skipIntroToggle.parentElement.parentElement.style.display = "flex";
+      skipRecapToggle.parentElement.parentElement.style.display = "flex";
       autoNextToggle.parentElement.parentElement.style.display = "flex";
       break;
     case "disney":
-      platformBadge.classList.remove("hide");
+      // platformBadge.classList.remove("hide");
       platformIcon.src = "icons8-disney-plus-96.png";
       platformText.innerText = "Disney+ Controls";
       skipIntroToggle.parentElement.parentElement.style.display = "flex";
@@ -101,17 +103,17 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 // Add event listeners for all toggles
 function setupToggleListener(toggle, storageKey) {
-  toggle.addEventListener("change", function() {
+  toggle.addEventListener("change", function () {
     const updates = {};
     updates[storageKey] = toggle.checked;
-    
+
     chrome.storage.sync.set(updates);
-    
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (toggle.checked) {
         chrome.scripting.executeScript({
           target: { tabId: tabs[0].id },
-          files: ["script.js"]
+          files: ["script.js"],
         });
       } else {
         chrome.scripting.executeScript({
@@ -121,7 +123,7 @@ function setupToggleListener(toggle, storageKey) {
               clearInterval(window.skipFeatureInterval);
               window.skipFeatureInterval = null;
             }
-          }
+          },
         });
       }
     });

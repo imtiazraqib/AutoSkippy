@@ -16,7 +16,7 @@
         justify-content: center;
         align-items: center;
         width: 300px;
-        height: 400px;
+        height: auto;
       }
 
       .container {
@@ -29,14 +29,14 @@
         color: #333;
         text-align: center;
         margin: 0 0 20px 0;
-        font-size: 24px;
+        font-size: 20px;
       }
 
       .toggle-container {
         background: white;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 20px -8px #c5d6d6;
         margin-bottom: 20px;
       }
 
@@ -52,7 +52,7 @@
       }
 
       .toggle-group label {
-        font-size: 16px;
+        font-size: 14px;
         color: #333;
         font-weight: 500;
       }
@@ -79,7 +79,7 @@
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        transition: .4s;
+        transition: 0.4s;
         border-radius: 34px;
       }
 
@@ -91,7 +91,7 @@
         left: 4px;
         bottom: 4px;
         background-color: white;
-        transition: .4s;
+        transition: 0.4s;
         border-radius: 50%;
       }
 
@@ -110,7 +110,7 @@
         border-radius: 8px;
         text-align: center;
         margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 20px -8px #c5d6d6;
       }
 
       #platform-icon {
@@ -167,45 +167,48 @@
         <div class="toggle-group">
           <label>Skip Intro</label>
           <label class="switch">
-            <input type="checkbox" id="skip-intro-toggle">
+            <input type="checkbox" id="skip-intro-toggle" />
             <span class="slider"></span>
           </label>
         </div>
-        
+
         <div class="toggle-group">
           <label>Skip Ads</label>
           <label class="switch">
-            <input type="checkbox" id="skip-ads-toggle">
+            <input type="checkbox" id="skip-ads-toggle" />
             <span class="slider"></span>
           </label>
         </div>
-        
+
         <div class="toggle-group">
           <label>Skip Recap</label>
           <label class="switch">
-            <input type="checkbox" id="skip-recap-toggle">
+            <input type="checkbox" id="skip-recap-toggle" />
             <span class="slider"></span>
           </label>
         </div>
-        
+
         <div class="toggle-group">
           <label>Auto Next</label>
           <label class="switch">
-            <input type="checkbox" id="auto-next-toggle">
+            <input type="checkbox" id="auto-next-toggle" />
             <span class="slider"></span>
           </label>
         </div>
       </div>
 
       <div id="platform-info">
-        <img id="platform-icon" src="" alt="Platform Icon">
+        <img id="platform-icon" src="" alt="Platform Icon" />
         <span id="platform-text">No actions available</span>
         <span id="platform-badge" class="badge hide">In Progress</span>
       </div>
 
       <div class="footer">
         <p>Version 3.0.0</p>
-        <p>Made with ❤️ & ☕ by <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer">Imtiaz Raqib</a></p>
+        <p>
+          Made with ❤️ & ☕ by
+          <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer">Imtiaz Raqib</a>
+        </p>
       </div>
     </div>
 
