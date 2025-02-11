@@ -3,154 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AutoSkippy For Netflix</title>
+    <title>AutoSkippy</title>
     <style>
       /* General styles */
       @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
       body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom right, #8e2de2, #8e2de2); /* Gradient background */
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(to bottom right, #8e2de2, #8e2de2);
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 240px;
-        font-family: "Poppins", sans-serif;
-        font-weight: 400;
-        font-style: normal;
+        width: 300px;
+        height: auto;
       }
 
-      /* Hide element */
+      .container {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      h3 {
+        color: #333;
+        text-align: center;
+        margin: 0 0 20px 0;
+        font-size: 20px;
+      }
+
+      .toggle-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+        margin-bottom: 20px;
+      }
+
+      .toggle-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .toggle-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .toggle-group label {
+        font-size: 14px;
+        color: #333;
+        font-weight: 500;
+      }
+
+      /* Toggle switch styles */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #5cb85c;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(30px);
+      }
+
+      /* Platform info styles */
+      #platform-info {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+      }
+
+      #platform-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      #platform-text {
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .badge {
+        background: #f5b342;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-left: 8px;
+      }
+
       .hide {
         display: none;
       }
 
-      .toggle-button-cover {
-        display: table-cell;
-        position: relative;
-        width: 220px;
-        height: 220px;
-        box-sizing: border-box;
-      }
-
-      .button-cover {
-        height: 100px;
-        margin: 20px;
-        background-color: #fff;
-        box-shadow: 0 10px 20px -8px #c5d6d6;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-      }
-
-      .button-cover:before {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        color: #d7e3e3;
-        font-size: 12px;
-        line-height: 1;
-        padding: 5px;
-      }
-
-      .button-cover,
-      .knobs,
-      .layer {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-
-      .button {
-        position: relative;
-        top: 15%;
-        width: 74px;
-        height: 36px;
-        margin: -20px auto 0 auto;
-        overflow: hidden;
-      }
-
-      .button.r,
-      .button.r .layer {
-        border-radius: 100px;
-      }
-      .checkbox {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        opacity: 0;
-        cursor: pointer;
-        z-index: 3;
-      }
-
-      .knobs {
-        z-index: 2;
-      }
-
-      .layer {
-        width: 100%;
-        background-color: #ebf7fc;
-        transition: 0.3s ease all;
-        z-index: 1;
-      }
-      /* Button 3 */
-      #button-3 .knobs:before {
-        content: "OFF";
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 20px;
-        height: 10px;
-        color: #fff;
-        font-size: 10px;
-        font-weight: bold;
-        text-align: center;
-        line-height: 1;
-        padding: 9px 4px;
-        background-color: #f44336;
-        border-radius: 50%;
-        transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-      }
-
-      #button-3 .checkbox:active + .knobs:before {
-        width: 46px;
-        border-radius: 100px;
-      }
-
-      #button-3 .checkbox:checked:active + .knobs:before {
-        margin-left: -26px;
-      }
-
-      #button-3 .checkbox:checked + .knobs:before {
-        content: "ON";
-        left: 42px;
-        background-color: #5cb85c;
-      }
-
-      #button-3 .checkbox:checked ~ .layer {
-        background-color: #fcebeb;
-      }
+      /* Footer styles */
       .footer {
         text-align: center;
-        font-size: 10px;
-        color: #ffffff;
-        position: absolute;
-        bottom: 5px;
-        margin-left: 0;
-        margin-right: 0;
-        left: 0;
-        right: 0;
+        color: white;
+        font-size: 12px;
       }
 
       .footer p {
-        margin: 0;
+        margin: 5px 0;
       }
 
       .footer a {
@@ -161,55 +158,56 @@
       .footer a:hover {
         text-decoration: underline;
       }
-      #platform-info {
-        position: relative;
-        margin: auto;
-        width: 180px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 15px;
-        background-color: #fff;
-        color: black;
-        border-radius: 4px;
-        font-weight: bold;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        box-shadow: 0 10px 20px -8px #c5d6d6;
-      }
-      .badge {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #f5b342;
-        color: white;
-        padding: 5px;
-        border-radius: 4px;
-        font-size: 10px;
-      }
     </style>
   </head>
   <body>
-    <div class="toggle-button-cover">
-      <div class="button-cover">
-        <h3 style="margin: 15px 0px">AutoSkippy</h3>
-        <div class="button r" id="button-3">
-          <input id="extension-toggle" type="checkbox" class="checkbox" />
-          <div class="knobs"></div>
-          <div class="layer"></div>
+    <div class="container">
+      <div class="toggle-container">
+        <h3>AutoSkippy</h3>
+        <div class="toggle-group">
+          <label>Skip Intro</label>
+          <label class="switch">
+            <input type="checkbox" id="skip-intro-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <label>Skip Ads</label>
+          <label class="switch">
+            <input type="checkbox" id="skip-ads-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <label>Skip Recap</label>
+          <label class="switch">
+            <input type="checkbox" id="skip-recap-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <label>Auto Next</label>
+          <label class="switch">
+            <input type="checkbox" id="auto-next-toggle" />
+            <span class="slider"></span>
+          </label>
         </div>
       </div>
+
+      <div id="platform-info">
+        <img id="platform-icon" src="" alt="Platform Icon" />
+        <span id="platform-text">No actions available</span>
+        <span id="platform-badge" class="badge hide">In Progress</span>
+      </div>
+
       <div class="footer">
-        <div id="platform-info">
-          <img id="platform-icon" src="" alt="Platform Icon" style="width: 20px; height: 20px" />
-          <span id="platform-text">No actions available</span>
-          <div id="platform-badge" class="badge hide">In Progress</div>
-        </div>
-        <p>Version 2.0.12</p>
+        <p>Version 3.0.0</p>
         <p>
           Made with ❤️ & ☕ by
-          <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer"> Imtiaz Raqib </a>
+          <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer">Imtiaz Raqib</a>
         </p>
       </div>
     </div>
