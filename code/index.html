@@ -111,6 +111,18 @@
         text-align: center;
         margin-bottom: 20px;
         box-shadow: 0 10px 20px -8px #c5d6d6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      #platform-info .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
       }
 
       #platform-icon {
@@ -198,8 +210,10 @@
       </div>
 
       <div id="platform-info">
-        <img id="platform-icon" src="" alt="Platform Icon" />
-        <span id="platform-text">No actions available</span>
+        <div class="wrapper">
+          <img id="platform-icon" src="" alt="Platform Icon" />
+          <span id="platform-text">No actions available</span>
+        </div>
         <span id="platform-badge" class="badge hide">In Progress</span>
       </div>
 
@@ -207,7 +221,7 @@
         <p>Version 3.0.0</p>
         <p>
           Made with ❤️ & ☕ by
-          <a href="https://x.com/ImtiazRaqib" target="_blank" rel="noopener noreferrer">Imtiaz Raqib</a>
+          <a href="https://imtiazraqib.com" target="_blank" rel="noopener noreferrer">Imtiaz Raqib</a>
         </p>
       </div>
     </div>
