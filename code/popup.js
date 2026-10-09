@@ -1,15 +1,24 @@
 const skipIntroToggle = document.getElementById("skip-intro-toggle");
 const skipAdsToggle = document.getElementById("skip-ads-toggle");
+const muteNetflixAdsToggle = document.getElementById("mute-netflix-ads-toggle");
 const skipRecapToggle = document.getElementById("skip-recap-toggle");
 const autoNextToggle = document.getElementById("auto-next-toggle");
 
 chrome.storage.sync
-  .get(["skipIntro", "skipRecap", "autoNext", "skipAds", "extensionEnabled"])
+  .get([
+    "skipIntro",
+    "skipRecap",
+    "autoNext",
+    "skipAds",
+    "muteNetflixAds",
+    "extensionEnabled",
+  ])
   .then(function (result) {
     // Check for legacy setting and migrate
     if (result.extensionEnabled !== undefined && result.extensionEnabled) {
       skipIntroToggle.checked = true;
       skipAdsToggle.checked = true;
+      muteNetflixAdsToggle.checked = true;
       skipRecapToggle.checked = true;
       autoNextToggle.checked = true;
 
@@ -17,6 +26,7 @@ chrome.storage.sync
         skipIntro: true,
         skipRecap: true,
         skipAds: true,
+        muteNetflixAds: true,
         autoNext: true,
       });
 
@@ -24,6 +34,7 @@ chrome.storage.sync
     } else {
       skipIntroToggle.checked = result.skipIntro ?? false;
       skipAdsToggle.checked = result.skipAds ?? false;
+      muteNetflixAdsToggle.checked = result.muteNetflixAds ?? false;
       skipRecapToggle.checked = result.skipRecap ?? false;
       autoNextToggle.checked = result.autoNext ?? false;
     }
@@ -41,6 +52,7 @@ function setPlatformUI(platform) {
   skipRecapToggle.parentElement.parentElement.style.display = "none";
   skipIntroToggle.parentElement.parentElement.style.display = "none";
   skipAdsToggle.parentElement.parentElement.style.display = "none";
+  muteNetflixAdsToggle.parentElement.parentElement.style.display = "none";
   autoNextToggle.parentElement.parentElement.style.display = "none";
 
   switch (platform) {
@@ -50,6 +62,7 @@ function setPlatformUI(platform) {
       skipIntroToggle.parentElement.parentElement.style.display = "flex";
       skipRecapToggle.parentElement.parentElement.style.display = "flex";
       autoNextToggle.parentElement.parentElement.style.display = "flex";
+      muteNetflixAdsToggle.parentElement.parentElement.style.display = "flex";
       break;
     case "youtube":
       platformIcon.src = "icons8-youtube-96.png";
@@ -132,5 +145,6 @@ function setupToggleListener(toggle, storageKey) {
 
 setupToggleListener(skipIntroToggle, "skipIntro");
 setupToggleListener(skipAdsToggle, "skipAds");
+setupToggleListener(muteNetflixAdsToggle, "muteNetflixAds");
 setupToggleListener(skipRecapToggle, "skipRecap");
 setupToggleListener(autoNextToggle, "autoNext");
