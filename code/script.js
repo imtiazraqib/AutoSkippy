@@ -5,6 +5,26 @@
   }
 })();
 
+// Mark clicked elements on the DOM so a lingering button is never clicked
+// twice in a row, even if the script is re-injected into the same page.
+// The mark clears after 15s so a reused DOM node can still be clicked later.
+function clickOnce(element) {
+  if (!element || element.dataset.autoskippyClicked === "1") return;
+  element.dataset.autoskippyClicked = "1";
+  setTimeout(() => delete element.dataset.autoskippyClicked, 15000);
+  element.click();
+}
+
+function clickFirstMatching(selectors) {
+  for (const selector of selectors) {
+    const element = document.querySelector(selector);
+    if (element) {
+      clickOnce(element);
+      return;
+    }
+  }
+}
+
 // Single storage handler for both initial load and changes
 function handleStorageUpdate(result) {
   if (Object.values(result).some((val) => val)) {
@@ -20,13 +40,16 @@ chrome.storage.sync
   .then(handleStorageUpdate)
   .catch((error) => console.error("Error loading preferences:", error));
 
-// Listen for changes
-chrome.storage.onChanged.addListener(() => {
-  chrome.storage.sync
-    .get(["skipIntro", "skipRecap", "autoNext", "skipAds"])
-    .then(handleStorageUpdate)
-    .catch((error) => console.error("Error updating preferences:", error));
-});
+// Listen for changes, guarding against listeners stacking on re-injection
+if (!window.autoSkippyListenerAdded) {
+  window.autoSkippyListenerAdded = true;
+  chrome.storage.onChanged.addListener(() => {
+    chrome.storage.sync
+      .get(["skipIntro", "skipRecap", "autoNext", "skipAds"])
+      .then(handleStorageUpdate)
+      .catch((error) => console.error("Error updating preferences:", error));
+  });
+}
 
 function startSkipFeatures(preferences) {
   stopSkipFeatures();
@@ -39,7 +62,7 @@ function startSkipFeatures(preferences) {
       handleNetflix(preferences);
     } else if (currentUrl.includes("youtube.com")) {
       handleYoutube(preferences);
-    } else if (currentUrl.includes("primevideo.com")) {
+    } else if (currentUrl.includes("primevideo.com") || currentUrl.includes("amazon.")) {
       handlePrime(preferences);
     } else if (currentUrl.includes("crave.ca")) {
       handleCrave(preferences);
@@ -53,43 +76,49 @@ function handleNetflix(preferences) {
   const { skipIntro, skipRecap, autoNext } = preferences;
 
   if (skipIntro) {
-    const skipIntroButton = document.querySelector('button[data-uia="player-skip-intro"]');
-    if (skipIntroButton) skipIntroButton.click();
+    clickFirstMatching(['button[data-uia="player-skip-intro"]']);
   }
 
   if (skipRecap) {
-    const skipRecapButton = document.querySelector('button[data-uia="player-skip-recap"]');
-    if (skipRecapButton) skipRecapButton.click();
+    clickFirstMatching(['button[data-uia="player-skip-recap"]']);
   }
 
   if (autoNext) {
-    const nextEpisodeButton = document.querySelector('button[data-uia="next-episode-seamless-button"]');
-    if (nextEpisodeButton) nextEpisodeButton.click();
+    clickFirstMatching(['button[data-uia="next-episode-seamless-button"]']);
   }
 }
 
 function handleYoutube(preferences) {
   const { skipAds } = preferences;
   if (skipAds) {
-    const skipAdButton = document.querySelector(".ytp-ad-skip-button-modern");
+    const skipAdButton = document.querySelector(
+      ".ytp-ad-skip-button-modern, .ytp-ad-skip-button, .ytp-skip-ad-button"
+    );
     if (skipAdButton && skipAdButton.style.display !== "none") {
-      skipAdButton.click();
+      clickOnce(skipAdButton);
     }
 
-    const closeOverlayButton = document.querySelector(".ytp-ad-overlay-close-button");
-    if (closeOverlayButton) {
-      closeOverlayButton.click();
-    }
+    clickOnce(document.querySelector(".ytp-ad-overlay-close-button"));
   }
 }
 
 function handlePrime(preferences) {
-  const { skipIntro, skipRecap } = preferences;
+  const { skipIntro, skipRecap, autoNext } = preferences;
 
+  // Prime uses the same skip button for intro and recap
   if (skipIntro || skipRecap) {
-    // Prime uses same button for both
-    const skipButton = document.querySelector(".atvwebplayersdk-skipelement-button");
-    if (skipButton) skipButton.click();
+    clickFirstMatching([
+      ".atvwebplayersdk-skipelement-button",
+      "button[class*='skipelement']",
+      "[class*='skipelement'] button",
+    ]);
+  }
+
+  if (autoNext) {
+    clickFirstMatching([
+      ".atvwebplayersdk-nextupcard-button",
+      "button[class*='nextupcard']",
+    ]);
   }
 }
 
@@ -97,18 +126,15 @@ function handleCrave(preferences) {
   const { skipIntro, skipRecap, autoNext } = preferences;
 
   if (skipIntro) {
-    const skipIntroButton = document.querySelector('button[aria-label="Skip Intro"]');
-    if (skipIntroButton) skipIntroButton.click();
+    clickFirstMatching(['button[aria-label="Skip Intro"]']);
   }
 
   if (skipRecap) {
-    const skipRecapButton = document.querySelector('button[aria-label="Skip Recap"]');
-    if (skipRecapButton) skipRecapButton.click();
+    clickFirstMatching(['button[aria-label="Skip Recap"]']);
   }
 
   if (autoNext) {
-    const nextEpisodeButton = document.querySelector('button[aria-label="Play next content"]');
-    if (nextEpisodeButton) nextEpisodeButton.click();
+    clickFirstMatching(['button[aria-label="Play next content"]']);
   }
 }
 
@@ -116,16 +142,13 @@ function handleDisney(preferences) {
   const { skipIntro, autoNext } = preferences;
 
   if (skipIntro) {
-    const skipIntroButton = document.querySelector(".skip__button");
-    if (skipIntroButton) {
-      setTimeout(() => {
-        skipIntroButton.click();
-      }, 2000); // Delay to allow skip button to disappear once pressed
-    }
+    clickFirstMatching([".skip__button", "button[class*='skip__button']"]);
   }
+
   if (autoNext) {
-    const nextEpisodeButton = document.querySelector('button[aria-label="NEXT EPISODE IN 8"]');
-    if (nextEpisodeButton) nextEpisodeButton.click();
+    // The label contains a countdown (e.g. "NEXT EPISODE IN 8"), so match a
+    // case-insensitive substring instead of the full label.
+    clickFirstMatching(["button[aria-label*='next episode' i]"]);
   }
 }
 

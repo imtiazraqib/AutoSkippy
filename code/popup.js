@@ -85,12 +85,12 @@ function setPlatformUI(platform) {
 
 // Get the active tab's URL and set the platform UI
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  let url = tabs[0].url;
+  let url = tabs[0]?.url || "";
   if (url.includes("netflix.com")) {
     setPlatformUI("netflix");
   } else if (url.includes("youtube.com")) {
     setPlatformUI("youtube");
-  } else if (url.includes("primevideo.com")) {
+  } else if (url.includes("primevideo.com") || url.includes("amazon.")) {
     setPlatformUI("prime");
   } else if (url.includes("crave.ca")) {
     setPlatformUI("crave");
@@ -118,7 +118,7 @@ function setupToggleListener(toggle, storageKey) {
       } else {
         chrome.scripting.executeScript({
           target: { tabId: tabs[0].id },
-          function: () => {
+          func: () => {
             if (window.skipFeatureInterval) {
               clearInterval(window.skipFeatureInterval);
               window.skipFeatureInterval = null;
