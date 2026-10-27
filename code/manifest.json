@@ -5,7 +5,10 @@
   "manifest_version": 3,
   "browser_specific_settings": {
     "gecko": {
-      "id": "autoskippy@raqib.tech"
+      "id": "autoskippy@raqib.tech",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "author": "Imtiaz Raqib",
