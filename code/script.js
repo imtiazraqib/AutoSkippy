@@ -102,27 +102,23 @@ function handleYoutube(preferences) {
   }
 }
 
-const PRIME_SKIP_SELECTORS = [
-  ".atvwebplayersdk-skipelement-button",
-  "button[class*='skipelement']",
-  "[class*='skipelement'] button",
-];
-
-const PRIME_NEXT_SELECTORS = [
-  ".atvwebplayersdk-nextupcard-button",
-  "button[class*='nextupcard']",
-];
-
 function handlePrime(preferences) {
   const { skipIntro, skipRecap, autoNext } = preferences;
 
   // Prime uses the same skip button for intro and recap
   if (skipIntro || skipRecap) {
-    clickFirstMatching(PRIME_SKIP_SELECTORS);
+    clickFirstMatching([
+      ".atvwebplayersdk-skipelement-button",
+      "button[class*='skipelement']",
+      "[class*='skipelement'] button",
+    ]);
   }
 
   if (autoNext) {
-    clickFirstMatching(PRIME_NEXT_SELECTORS);
+    clickFirstMatching([
+      ".atvwebplayersdk-nextupcard-button",
+      "button[class*='nextupcard']",
+    ]);
   }
 }
 

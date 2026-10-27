@@ -85,7 +85,7 @@ function setPlatformUI(platform) {
 
 // Get the active tab's URL and set the platform UI
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  let url = tabs[0].url;
+  let url = tabs[0]?.url || "";
   if (url.includes("netflix.com")) {
     setPlatformUI("netflix");
   } else if (url.includes("youtube.com")) {
