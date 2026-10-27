@@ -1,6 +1,6 @@
 {
   "name": "AutoSkippy | Skip Intros, Ads, Recaps & More",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Automatically skip intros, ads, recaps and next episode in Netflix, Prime Video, Disney+, Crave and more.",
   "manifest_version": 3,
   "browser_specific_settings": {
@@ -33,7 +33,22 @@
         "*://*.youtube.com/*",
         "*://*.primevideo.com/*",
         "*://*.disneyplus.com/*",
-        "*://*.crave.ca/*"
+        "*://*.crave.ca/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.it/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.in/*",
+        "*://*.amazon.com.au/*",
+        "*://*.amazon.com.br/*",
+        "*://*.amazon.com.mx/*",
+        "*://*.amazon.nl/*",
+        "*://*.amazon.se/*",
+        "*://*.amazon.pl/*"
       ],
       "js": ["script.js"]
     }
