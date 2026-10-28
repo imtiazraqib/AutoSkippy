@@ -1,3 +1,5 @@
+window.adMuteState = window.adMuteState || { mutedVideos: new Set() };
+
 (function cleanup() {
   if (window.skipFeatureInterval) {
     clearInterval(window.skipFeatureInterval);
@@ -36,7 +38,7 @@ function handleStorageUpdate(result) {
 
 // Initial load
 chrome.storage.sync
-  .get(["skipIntro", "skipRecap", "autoNext", "skipAds"])
+  .get(["skipIntro", "skipRecap", "autoNext", "skipAds", "muteNetflixAds"])
   .then(handleStorageUpdate)
   .catch((error) => console.error("Error loading preferences:", error));
 
@@ -45,14 +47,15 @@ if (!window.autoSkippyListenerAdded) {
   window.autoSkippyListenerAdded = true;
   chrome.storage.onChanged.addListener(() => {
     chrome.storage.sync
-      .get(["skipIntro", "skipRecap", "autoNext", "skipAds"])
+      .get(["skipIntro", "skipRecap", "autoNext", "skipAds", "muteNetflixAds"])
       .then(handleStorageUpdate)
       .catch((error) => console.error("Error updating preferences:", error));
   });
 }
 
 function startSkipFeatures(preferences) {
-  stopSkipFeatures();
+  clearInterval(window.skipFeatureInterval);
+  if (!preferences.muteNetflixAds) restoreNetflixAdMute();
 
   console.log("Starting skip features with preferences:", preferences);
   window.skipFeatureInterval = setInterval(() => {
@@ -73,7 +76,7 @@ function startSkipFeatures(preferences) {
 }
 
 function handleNetflix(preferences) {
-  const { skipIntro, skipRecap, autoNext } = preferences;
+  const { skipIntro, skipRecap, autoNext, muteNetflixAds } = preferences;
 
   if (skipIntro) {
     clickFirstMatching(['button[data-uia="player-skip-intro"]']);
@@ -85,6 +88,10 @@ function handleNetflix(preferences) {
 
   if (autoNext) {
     clickFirstMatching(['button[data-uia="next-episode-seamless-button"]']);
+  }
+
+  if (muteNetflixAds) {
+    handleNetflixAdMuting();
   }
 }
 
@@ -153,8 +160,32 @@ function handleDisney(preferences) {
 }
 
 function stopSkipFeatures() {
+  restoreNetflixAdMute();
   if (window.skipFeatureInterval) {
     clearInterval(window.skipFeatureInterval);
     window.skipFeatureInterval = null;
+  }
+}
+
+function restoreNetflixAdMute() {
+  for (const video of window.adMuteState.mutedVideos) {
+    video.muted = false;
+  }
+  window.adMuteState.mutedVideos.clear();
+}
+
+function handleNetflixAdMuting() {
+  if (!document.querySelector('[data-uia="ads-info-text"]')) {
+    restoreNetflixAdMute();
+    return;
+  }
+
+  // Mute videos directly. Clicking the volume control pins the player chrome.
+  for (const video of document.querySelectorAll("video")) {
+    if (!video.muted) {
+      window.adMuteState.mutedVideos.add(video);
+      // Netflix can reset muted during an ad, so reapply it until muting is disabled.
+      video.muted = true;
+    }
   }
 }

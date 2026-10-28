@@ -1,11 +1,20 @@
 const skipIntroToggle = document.getElementById("skip-intro-toggle");
 const skipAdsToggle = document.getElementById("skip-ads-toggle");
+const muteNetflixAdsToggle = document.getElementById("mute-netflix-ads-toggle");
 const skipRecapToggle = document.getElementById("skip-recap-toggle");
 const autoNextToggle = document.getElementById("auto-next-toggle");
 
 chrome.storage.sync
-  .get(["skipIntro", "skipRecap", "autoNext", "skipAds", "extensionEnabled"])
+  .get([
+    "skipIntro",
+    "skipRecap",
+    "autoNext",
+    "skipAds",
+    "muteNetflixAds",
+    "extensionEnabled",
+  ])
   .then(function (result) {
+    muteNetflixAdsToggle.checked = result.muteNetflixAds ?? false;
     // Check for legacy setting and migrate
     if (result.extensionEnabled !== undefined && result.extensionEnabled) {
       skipIntroToggle.checked = true;
@@ -41,6 +50,7 @@ function setPlatformUI(platform) {
   skipRecapToggle.parentElement.parentElement.style.display = "none";
   skipIntroToggle.parentElement.parentElement.style.display = "none";
   skipAdsToggle.parentElement.parentElement.style.display = "none";
+  muteNetflixAdsToggle.parentElement.parentElement.style.display = "none";
   autoNextToggle.parentElement.parentElement.style.display = "none";
 
   switch (platform) {
@@ -50,6 +60,7 @@ function setPlatformUI(platform) {
       skipIntroToggle.parentElement.parentElement.style.display = "flex";
       skipRecapToggle.parentElement.parentElement.style.display = "flex";
       autoNextToggle.parentElement.parentElement.style.display = "flex";
+      muteNetflixAdsToggle.parentElement.parentElement.style.display = "flex";
       break;
     case "youtube":
       platformIcon.src = "icons8-youtube-96.png";
@@ -115,16 +126,6 @@ function setupToggleListener(toggle, storageKey) {
           target: { tabId: tabs[0].id },
           files: ["script.js"],
         });
-      } else {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          func: () => {
-            if (window.skipFeatureInterval) {
-              clearInterval(window.skipFeatureInterval);
-              window.skipFeatureInterval = null;
-            }
-          },
-        });
       }
     });
   });
@@ -132,5 +133,6 @@ function setupToggleListener(toggle, storageKey) {
 
 setupToggleListener(skipIntroToggle, "skipIntro");
 setupToggleListener(skipAdsToggle, "skipAds");
+setupToggleListener(muteNetflixAdsToggle, "muteNetflixAds");
 setupToggleListener(skipRecapToggle, "skipRecap");
 setupToggleListener(autoNextToggle, "autoNext");
