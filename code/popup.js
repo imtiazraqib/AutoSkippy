@@ -14,11 +14,11 @@ chrome.storage.sync
     "extensionEnabled",
   ])
   .then(function (result) {
+    muteNetflixAdsToggle.checked = result.muteNetflixAds ?? false;
     // Check for legacy setting and migrate
     if (result.extensionEnabled !== undefined && result.extensionEnabled) {
       skipIntroToggle.checked = true;
       skipAdsToggle.checked = true;
-      muteNetflixAdsToggle.checked = true;
       skipRecapToggle.checked = true;
       autoNextToggle.checked = true;
 
@@ -26,7 +26,6 @@ chrome.storage.sync
         skipIntro: true,
         skipRecap: true,
         skipAds: true,
-        muteNetflixAds: true,
         autoNext: true,
       });
 
@@ -34,7 +33,6 @@ chrome.storage.sync
     } else {
       skipIntroToggle.checked = result.skipIntro ?? false;
       skipAdsToggle.checked = result.skipAds ?? false;
-      muteNetflixAdsToggle.checked = result.muteNetflixAds ?? false;
       skipRecapToggle.checked = result.skipRecap ?? false;
       autoNextToggle.checked = result.autoNext ?? false;
     }
@@ -98,12 +96,12 @@ function setPlatformUI(platform) {
 
 // Get the active tab's URL and set the platform UI
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  let url = tabs[0].url;
+  let url = tabs[0]?.url || "";
   if (url.includes("netflix.com")) {
     setPlatformUI("netflix");
   } else if (url.includes("youtube.com")) {
     setPlatformUI("youtube");
-  } else if (url.includes("primevideo.com")) {
+  } else if (url.includes("primevideo.com") || url.includes("amazon.")) {
     setPlatformUI("prime");
   } else if (url.includes("crave.ca")) {
     setPlatformUI("crave");
@@ -127,16 +125,6 @@ function setupToggleListener(toggle, storageKey) {
         chrome.scripting.executeScript({
           target: { tabId: tabs[0].id },
           files: ["script.js"],
-        });
-      } else {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: () => {
-            if (window.skipFeatureInterval) {
-              clearInterval(window.skipFeatureInterval);
-              window.skipFeatureInterval = null;
-            }
-          },
         });
       }
     });

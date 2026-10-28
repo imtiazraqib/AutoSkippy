@@ -1,0 +1,51 @@
+{
+  "name": "AutoSkippy | Skip Intros, Ads, Recaps & More",
+  "version": "3.1.0",
+  "description": "Automatically skip intros, ads, recaps and next episode in Netflix, Prime Video, Disney+, Crave and more.",
+  "manifest_version": 3,
+  "author": "Imtiaz Raqib",
+  "icons": {
+    "16": "autoskippy_16.png",
+    "32": "autoskippy_32.png",
+    "48": "autoskippy_48.png",
+    "128": "autoskippy_128.png"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "AutoSkippy",
+    "default_icon": {
+      "16": "autoskippy_16.png",
+      "32": "autoskippy_32.png",
+      "48": "autoskippy_48.png",
+      "128": "autoskippy_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.netflix.com/*",
+        "*://*.youtube.com/*",
+        "*://*.primevideo.com/*",
+        "*://*.disneyplus.com/*",
+        "*://*.crave.ca/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.it/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.in/*",
+        "*://*.amazon.com.au/*",
+        "*://*.amazon.com.br/*",
+        "*://*.amazon.com.mx/*",
+        "*://*.amazon.nl/*",
+        "*://*.amazon.se/*",
+        "*://*.amazon.pl/*"
+      ],
+      "js": ["script.js"]
+    }
+  ]
+}

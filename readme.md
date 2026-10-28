@@ -16,6 +16,7 @@ AutoSkippy revolutionizes your streaming experience by automatically skipping in
 - **Ad Skipping**: Automatically skips ads on YouTube and other platforms.
 - **Recap Skipping**: Eliminates recap screens so you can dive right into the next episode.
 - **Next Episode Button**: Seamlessly advances to the next episode without interruption.
+- **Prime Video Everywhere**: Works on primevideo.com and on Amazon watch pages (amazon.com and regional domains).
 - **Stylish Design**: Sleek toggle button with interactive indicators.
 - **Accessibility**: Perfect for everyone, especially those who prefer a hands-free experience.
 - **Privacy First**: Your data stays private; AutoSkippy operates securely within streaming platforms.
